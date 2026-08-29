@@ -10,8 +10,9 @@ def evaluate_password(password):
     has_digit = bool(re.search(r"\d", password))
     has_special = bool(re.search(r"[!@#$%^&*(),.?\":{}|<>]", password))
 
-    # 2. Calculate Pool Size (R) and Entropy (E = L * log2(R))
+    # 2. Calculate Pool Size and Entropy
     pool_size = 0
+
     if has_lower:
         pool_size += 26
     if has_upper:
@@ -22,7 +23,9 @@ def evaluate_password(password):
         pool_size += 32
 
     entropy = (
-        length * math.log2(pool_size) if pool_size > 0 and length > 0 else 0
+        length * math.log2(pool_size)
+        if pool_size > 0 and length > 0
+        else 0
     )
 
     # 3. Classify Strength
@@ -37,12 +40,16 @@ def evaluate_password(password):
 
     # 4. Feedback Generation
     feedback = []
+
     if length < 12:
         feedback.append("Increase length to at least 12 characters.")
+
     if not (has_lower and has_upper):
         feedback.append("Mix uppercase and lowercase letters.")
+
     if not has_digit:
         feedback.append("Include numbers.")
+
     if not has_special:
         feedback.append("Include special characters.")
 
@@ -50,10 +57,14 @@ def evaluate_password(password):
         "Entropy": round(entropy, 2),
         "Strength": strength,
         "Feedback": (
-            feedback if feedback else ["Great! Strong password pattern."]
+            feedback
+            if feedback
+            else ["Great! Strong password pattern."]
         )
-    
-    if __name__ == "__main__":
+    }
+
+
+if __name__ == "__main__":
     password = input("Enter password: ")
     result = evaluate_password(password)
 
