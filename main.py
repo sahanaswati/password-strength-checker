@@ -51,6 +51,6 @@ def evaluate_password(password):
         "Strength": strength,
         "Feedback": (
             feedback if feedback else ["Great! Strong password pattern."]
-        ),
+        )
     }
   
