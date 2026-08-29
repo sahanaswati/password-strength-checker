@@ -52,5 +52,14 @@ def evaluate_password(password):
         "Feedback": (
             feedback if feedback else ["Great! Strong password pattern."]
         )
-    }
+    
+    if __name__ == "__main__":
+    password = input("Enter password: ")
+    result = evaluate_password(password)
+
+    print("\nPassword Strength Report")
+    print("Entropy:", result["Entropy"])
+    print("Strength:", result["Strength"])
+    print("Feedback:", result["Feedback"])
+    
   
